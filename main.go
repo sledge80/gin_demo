@@ -42,7 +42,7 @@ func main() {
 
 	// 4、初始化Redis连接
 	if err := redis.Init(); err != nil {
-		fmt.Printf("mysql init failed, err:%V\n", err)
+		fmt.Printf("redis init failed, err:%V\n", err)
 		return
 	}
 	defer redis.Close()

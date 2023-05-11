@@ -10,7 +10,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-var db *sqlx.DB
+var Db *sqlx.DB
 
 func Init() (err error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True",
@@ -21,16 +21,16 @@ func Init() (err error) {
 		settings.Conf.MySQLConfig.Dbname,
 	)
 	// 也可以使用MustConnect连接不成功就panic
-	db, err = sqlx.Connect("mysql", dsn)
+	Db, err = sqlx.Connect("mysql", dsn)
 	if err != nil {
 		zap.L().Error("connect DB failed, err:%v\n", zap.Error(err))
 		return
 	}
-	db.SetMaxOpenConns(settings.Conf.MySQLConfig.MaxOpenConns)
-	db.SetMaxIdleConns(settings.Conf.MySQLConfig.MaxIdleConns)
+	Db.SetMaxOpenConns(settings.Conf.MySQLConfig.MaxOpenConns)
+	Db.SetMaxIdleConns(settings.Conf.MySQLConfig.MaxIdleConns)
 	return
 }
 
 func Close() {
-	_ = db.Close()
+	_ = Db.Close()
 }

@@ -7,10 +7,10 @@ import (
 	"github.com/go-redis/redis"
 )
 
-var rdb *redis.Client
+var Rdb *redis.Client
 
 func Init() (err error) {
-	rdb = redis.NewClient(&redis.Options{
+	Rdb = redis.NewClient(&redis.Options{
 		Addr: fmt.Sprintf("%s:%d",
 			settings.Conf.RedisConfig.Host,
 			settings.Conf.RedisConfig.Port,
@@ -20,10 +20,10 @@ func Init() (err error) {
 		PoolSize: settings.Conf.RedisConfig.PoolSize,
 	})
 
-	_, err = rdb.Ping().Result()
+	_, err = Rdb.Ping().Result()
 	return
 }
 
 func Close() {
-	_ = rdb.Close()
+	_ = Rdb.Close()
 }

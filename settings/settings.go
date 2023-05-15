@@ -7,7 +7,11 @@ import (
 	"github.com/spf13/viper"
 )
 
-var Conf = new(AppConfig)
+// var Conf = new(AppConfig)
+/*
+ 对结构体进行&取地址操作时，视为对该类型进行一次 new 的实例化操作
+*/
+var Conf = &AppConfig{}
 
 type AppConfig struct {
 	Name         string `mapstructure:"name"`
